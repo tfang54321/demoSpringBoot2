@@ -14,30 +14,365 @@
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	
+	
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<jjwt.version>0.9.0</jjwt.version>
+		<properties.maven.plugin.version>1.0.0</properties.maven.plugin.version>
+		<exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
 
+		<!-- <webapp.base.dir>../sbms-web</webapp.base.dir> -->
+		<!-- The output directory for angular-cli ng build command. It should match 
+			with the value of outDir property in sbms-web/.angular-cli.json file -->
+		<!-- <webapp.dist.dir>${webapp.base.dir}/dist</webapp.dist.dir> -->
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+
+		<dependency>
+
+			<groupId>io.springfox</groupId>
+
+			<artifactId>springfox-swagger-ui</artifactId>
+
+			<version>2.6.1</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>io.springfox</groupId>
+
+			<artifactId>springfox-swagger2</artifactId>
+
+			<version>2.6.1</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<!-- <scope>runtime</scope> -->
+		</dependency>
+		<!-- JDBC drivers for MS-SQL database -->
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- <dependency> <groupId>com.microsoft.sqlserver</groupId> <artifactId>sqljdbc4</artifactId> 
+			<version>4.0</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.2</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			</dependency> -->
+
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+			<version>1.7.5</version> </dependency> -->
+
+
+		<!-- https://mvnrepository.com/artifact/net.sf.dozer/dozer -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.powermock</groupId>
+		    <artifactId>powermock-module-junit4</artifactId>
+		    <version>1.7.4</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.powermock</groupId>
+		    <artifactId>powermock-api-mockito</artifactId>
+		    <version>1.7.4</version>
+		    <scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>releases</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.5.1</version>
+						<executions>
+							<execution>
+								<id>default-deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<serverId>nexus</serverId>
+							<nexusUrl>https://lasonami01.bank-banque-canada.ca/</nexusUrl>
+							<skipStaging>true</skipStaging>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>Run npm install</id>
+			<activation>
+				<property>
+					<name>npm</name>
+					<value>true</value>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+					<!-- Use exec maven plug-in to execute npm commands -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${exec.maven.plugin.version}</version>
+						<executions>
+							<execution>
+								<!-- Run npm build prod to build the angular project -->
+								<!-- <id>NPM Install</id> <phase>generate-sources</phase> <goals> 
+									<goal>exec</goal> </goals> <configuration> <executable>./misc/npmInstall.cmd</executable> 
+									<commandlineArgs>${webapp.base.dir} ${npm.path}</commandlineArgs> </configuration> -->
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- A plug-in to read external property files -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>${properties.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>./build.web.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Use exec maven plug-in to execute npm commands -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<!--<execution> -->
+					<!--<id>NPM Install</id> -->
+					<!--<phase>generate-sources</phase> -->
+					<!--<goals> -->
+					<!--<goal>exec</goal> -->
+					<!--</goals> -->
+					<!--<configuration> -->
+					<!--<executable>./misc/npmInstall.cmd</executable> -->
+					<!--<commandlineArgs>${webapp.base.dir} ${npm.path}</commandlineArgs> -->
+					<!--</configuration> -->
+					<!--</execution> -->
+					<execution>
+						<!-- Run npm build prod to build the angular project -->
+						<!-- <id>Build Angular Project</id> <phase>process-sources</phase> 
+							<goals> <goal>exec</goal> </goals> <configuration> <executable>./misc/buildAngular.cmd</executable> 
+							<commandlineArgs>${webapp.base.dir} ${npm.path}</commandlineArgs> </configuration> -->
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dev-resources1</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+
+							<overwrite>true</overwrite>
+
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<!-- source -->
+
+									<directory>src/main/resources</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+
+
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-dev-resources2</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+
+							<overwrite>true</overwrite>
+
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<!-- source -->
+
+
+									<directory>src/main/webapp</directory>
+
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+
+
+				</executions>
+			</plugin>
+
+		</plugins>
+
+
+		<resources>
+			<!-- Spring Boot will serve static content from a number of directories 
+				on the Java classpath. So we have to make sure that the Angular2 application 
+				ends up in one of those directories. Files on the classpath that are not 
+				Java classes, are known as resources. Add the packaged Angular2 application 
+				to the resources. The given targetPath will put it in /static on the classpath 
+				and Spring Boot will serve it from there. -->
+			<resource>
+				<directory>${webapp.dist.dir}</directory>
+				<targetPath>static</targetPath>
+			</resource>
+		</resources>
+
+
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>BOC Nexus</name>
+			<url>https://lasonami01.bank-banque-canada.ca/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 </project>
